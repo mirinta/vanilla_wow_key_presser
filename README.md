@@ -1,10 +1,11 @@
-# vanilla_battleground
+# vanilla_wow_battleground
 Just for fun.
+Automatically join/leave battleground
 
 # Install Requirements
 ```conda install -c conda-forge pywinauto```
 
-# The Join/Leave BattleGround Macro
+# The Join/Leave Battleground Macro
 ```
 /tar {NPC_name}
 /run DeclineGroup()
@@ -16,10 +17,10 @@ Just for fun.
 ```
 
 # Keybinds
-Keybinding 1: the join/leave BG macro <br>
+Keybinding 1: the macro of join/leave battleground BG <br>
 Keybinding F12: interact with target NPC <br>
-keybinding 2: any spell <br>
-Keybinding 3: any spell <br>
+keybinding 2: any non-enemy-target spell <br>
+Keybinding 3: any non-enemy-target spell <br>
 
 # References
 1. https://stackoverflow.com/questions/54362326/how-to-make-pywinauto-work-in-background
