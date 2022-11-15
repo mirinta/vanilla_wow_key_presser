@@ -3,7 +3,10 @@ Just for fun.
 Automatically join/leave battleground
 
 # Install Requirements
-```conda install -c conda-forge pywinauto```
+```
+conda install -c conda-forge pywinauto
+conda install pyqt5 
+```
 
 # The Join/Leave Battleground Macro
 ```
@@ -26,3 +29,4 @@ Keybinding 3: any non-enemy-target spell <br>
 1. https://stackoverflow.com/questions/54362326/how-to-make-pywinauto-work-in-background
 2. https://pywinauto.readthedocs.io/en/latest/code/pywinauto.keyboard.html
 3. https://wowwiki-archive.fandom.com/wiki/World_of_Warcraft_API
+4. https://stackoverflow.com/questions/49886313/how-to-run-a-while-loop-with-pyqt5
