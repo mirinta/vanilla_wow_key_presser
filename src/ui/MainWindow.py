@@ -4,7 +4,7 @@ import psutil
 from PyQt5.QtWidgets import QMainWindow, QWidget, QLabel, QHBoxLayout, QVBoxLayout
 from PyQt5.QtWidgets import QPushButton, QListWidget, QAbstractItemView
 from PyQt5.QtCore import QThread, pyqtSignal
-from PyQt5.QtGui import QIcon, QCloseEvent
+from PyQt5.QtGui import QIcon
 
 from core.Worker import Worker
 
