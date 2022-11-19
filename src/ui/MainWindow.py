@@ -58,7 +58,7 @@ class MainWindow(QMainWindow):
         show_action = QAction("Show", self)
         hide_action = QAction("Hide", self)
         exit_action = QAction("Exit", self)
-        show_action.triggered.connect(self.show)
+        show_action.triggered.connect(self.showNormal)
         hide_action.triggered.connect(self.hide)
         exit_action.triggered.connect(QApplication.instance().quit)
         self.tray_icon.activated.connect(self.on_tray_icon_activated)
