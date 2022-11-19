@@ -28,7 +28,10 @@ class Worker(QObject):
             self.msg_reported.emit(time_message.format(t1))
             time.sleep(t1)
             for k in ["1", '{F12}', "1", "1", "2", "3", '{SPACE}']:
-                self.msg_reported.emit(key_message.format(time=datetime.now().strftime('%Y-%m-%d %H:%M:%S'), key=k))
+                self.msg_reported.emit(
+                    key_message.format(
+                        time=datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                        key=k))
                 form.send_keystrokes(k)
                 t2 = random.choice(sleep_times)
                 self.msg_reported.emit(time_message.format(t2))

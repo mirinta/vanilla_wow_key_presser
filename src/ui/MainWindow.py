@@ -3,8 +3,20 @@ import os
 import psutil
 from PyQt5.QtCore import (QThread, pyqtSignal, QEvent, Qt)
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QLabel, QHBoxLayout, QVBoxLayout, QAction, QPushButton,
-                             QListWidget, QAbstractItemView, QTextEdit, QSystemTrayIcon, QMenu)
+from PyQt5.QtWidgets import (
+    QApplication,
+    QMainWindow,
+    QWidget,
+    QLabel,
+    QHBoxLayout,
+    QVBoxLayout,
+    QAction,
+    QPushButton,
+    QListWidget,
+    QAbstractItemView,
+    QTextEdit,
+    QSystemTrayIcon,
+    QMenu)
 
 from core.Worker import Worker
 
@@ -17,10 +29,15 @@ class MainWindow(QMainWindow):
         self.worker = None
         self.thread = None
 
-        icon = QIcon(os.path.join(os.path.dirname(__file__), "../resource/icon.png"))
+        icon = QIcon(
+            os.path.join(
+                os.path.dirname(__file__),
+                "../resource/icon.png"))
         self.setWindowIcon(icon)
         self.setWindowTitle("Vanilla WoW Battleground Bot")
-        self.setWindowFlags(self.windowFlags() & (~Qt.WindowMaximizeButtonHint))
+        self.setWindowFlags(
+            self.windowFlags() & (
+                ~Qt.WindowMaximizeButtonHint))
         self.setMinimumSize(350, 350)
         self.setCentralWidget(QWidget(self))
         main_layout = QVBoxLayout()
@@ -70,7 +87,8 @@ class MainWindow(QMainWindow):
 
     def on_refresh_clicked(self):
         self.pid_list.clear()
-        self.pid_list.addItems([str(p.pid) for p in psutil.process_iter() if p.name() == "WowClassic.exe"])
+        self.pid_list.addItems(
+            [str(p.pid) for p in psutil.process_iter() if p.name() == "WowClassic.exe"])
 
     def on_start_clicked(self):
         if not self.pid_list.count() or self.pid_list.currentRow() < 0:
