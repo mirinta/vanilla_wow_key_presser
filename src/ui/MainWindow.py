@@ -20,7 +20,7 @@ class MainWindow(QMainWindow):
         icon = QIcon(os.path.join(os.path.dirname(__file__), "../resource/icon.png"))
         self.setWindowIcon(icon)
         self.setWindowTitle("Vanilla WoW Battleground Bot")
-        self.setWindowFlags(self.windowFlags() | Qt.WindowStaysOnTopHint)
+        self.setWindowFlags(self.windowFlags() & (~Qt.WindowMaximizeButtonHint))
         self.setMinimumSize(350, 350)
         self.setCentralWidget(QWidget(self))
         main_layout = QVBoxLayout()
