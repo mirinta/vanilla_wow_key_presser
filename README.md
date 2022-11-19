@@ -4,6 +4,8 @@ Automatically join/leave battleground
 
 # Install Requirements
 ```
+conda create -n vanilla_bg python=3.6 
+conda activate vanilla_bg
 conda install -c conda-forge pywinauto
 conda install pyqt5 
 ```
@@ -19,7 +21,7 @@ conda install pyqt5
 /run if GetBattlefieldWinner() then LeaveBattlefield() end
 ```
 
-# Keybinds
+# Keybindings
 Keybinding 1: the macro of join/leave battleground BG <br>
 Keybinding F12: interact with target NPC <br>
 keybinding 2: any non-enemy-target spell <br>

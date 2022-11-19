@@ -1,5 +1,5 @@
-import time
 import random
+import time
 from datetime import datetime
 
 from PyQt5.QtCore import QObject, pyqtSignal
@@ -7,8 +7,8 @@ from pywinauto import Application
 
 
 class Worker(QObject):
-
-    finished = pyqtSignal()
+    work_finished = pyqtSignal()
+    msg_reported = pyqtSignal(str)
 
     def __init__(self, parent=None):
         QObject.__init__(self, parent=parent)
@@ -18,23 +18,25 @@ class Worker(QObject):
     def start(self):
         wow = Application(backend="win32").connect(process=self.wow_pid)
         form = wow.window(title_re="魔兽世界")
-        message = "pressing key >{key}< @ {time}"
+        time_message = "wait for {} seconds..."
+        key_message = "press key >{key}< @ {time}"
         sleep_times = [0.5, 1, 1.5, 2, 2.5]
 
-        print("-" * 10)
+        self.msg_reported.emit("***** work started *****")
         while self.continue_run:
             t1 = random.choice(sleep_times)
-            print("wait for {} seconds...".format(t1))
+            self.msg_reported.emit(time_message.format(t1))
             time.sleep(t1)
             for k in ["1", '{F12}', "1", "1", "2", "3", '{SPACE}']:
-                print(message.format(time=datetime.now().strftime('%Y-%m-%d %H:%M:%S'), key=k))
+                self.msg_reported.emit(key_message.format(time=datetime.now().strftime('%Y-%m-%d %H:%M:%S'), key=k))
                 form.send_keystrokes(k)
                 t2 = random.choice(sleep_times)
-                print("wait for {} seconds...".format(t2))
+                self.msg_reported.emit(time_message.format(t2))
                 time.sleep(t2)
-            print("-" * 10)
+            self.msg_reported.emit("-" * 10)
 
-        self.finished.emit()
+        self.work_finished.emit()
+        self.msg_reported.emit("***** work finished *****")
 
     def stop(self):
         self.continue_run = False
