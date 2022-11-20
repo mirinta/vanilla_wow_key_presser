@@ -8,7 +8,7 @@ rem - cmd.exe to be initialized with conda init
 rem Define here the path to your conda installation
 set CONDAPATH=F:\Anaconda3
 rem Define here the name of the environment
-set ENVNAME=vanilla_bg
+set ENVNAME=vanilla_wow
 rem Define here the path to your main.py
 set MAINPATH=D:\projects\vanilla_wow_battleground\src\main.py
 
