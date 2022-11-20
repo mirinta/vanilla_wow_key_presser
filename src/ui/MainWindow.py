@@ -137,3 +137,7 @@ class MainWindow(QMainWindow):
             if self.windowState() & Qt.WindowMinimized:
                 self.hide()
         super(MainWindow, self).changeEvent(event)
+
+    def closeEvent(self, event):
+        self.stop_signal.emit()
+        super(MainWindow, self).closeEvent(event)
