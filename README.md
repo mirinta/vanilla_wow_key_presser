@@ -11,7 +11,7 @@ conda install pyqt5
 
 # TODO List
 - [ ] Timer (program running duration)
-- [ ] Exception handler (stop running when exception appears)
+- [x] Exception handler (stop sending keys when exception appears)
 - [ ] Custom key sequence (add/delete key and waiting time) 
 - [ ] Show screenshot (double click process ID to show a screenshot)
 - [ ] Multiple tasks (one key sequence for one process ID)

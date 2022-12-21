@@ -100,7 +100,7 @@ class MainWindow(QMainWindow):
         self.stop_signal.connect(self.worker.stop)
         self.worker.wow_pid = int(self.pid_list.currentItem().text())
         self.worker.moveToThread(self.thread)
-        self.worker.msg_reported.connect(self.messages.append)
+        self.worker.report_msg.connect(self.messages.append)
         self.worker.work_finished.connect(self.thread.quit)
         self.worker.work_finished.connect(self.worker.deleteLater)
 
