@@ -1,0 +1,5 @@
+{
+	"key_sequence": ["1", "{F11}"],
+	"sleep_times": [0.5],
+	"comments": "1=retrive/resurrect macro, F11=auto run"
+}

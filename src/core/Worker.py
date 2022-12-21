@@ -14,10 +14,15 @@ class Worker(QObject):
         QObject.__init__(self, parent=parent)
         self.continue_run = True
         self.wow_pid = 0
-        self.key_sequence = ["1", '{F12}', "1", "1", "2", "3", '{SPACE}']
-        self.sleep_times = [0.5, 1, 1.5, 2, 2.5]  # sleep x seconds between each key pressing
+        self.key_sequence = []  # key in string, e.g., ["1", "2", "{F12}"]
+        self.sleep_times = []  # time duration (in seconds) between each key
 
     def start(self):
+        if not len(self.key_sequence) or not len(self.sleep_times):
+            self.work_finished.emit()
+            self.report_msg.emit("***** invalid configuration *****")
+            return
+
         try:
             wow = Application(backend="win32").connect(process=self.wow_pid)
             form = wow.window(title_re="魔兽世界")
@@ -45,7 +50,8 @@ class Worker(QObject):
 
         except Exception as e:
             self.work_finished.emit()
-            self.report_msg.emit("***** work interrupted *****\n{}".format(str(e)))
+            self.report_msg.emit(
+                "***** error occurred *****\n{}".format(str(e)))
 
     def stop(self):
         self.continue_run = False

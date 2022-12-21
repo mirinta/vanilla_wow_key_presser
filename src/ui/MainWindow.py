@@ -1,4 +1,5 @@
 import os
+import json
 
 import psutil
 from PyQt5.QtCore import (QThread, pyqtSignal, QEvent, Qt)
@@ -16,7 +17,7 @@ from PyQt5.QtWidgets import (
     QAbstractItemView,
     QTextEdit,
     QSystemTrayIcon,
-    QMenu)
+    QMenu, QFileDialog)
 
 from core.Worker import Worker
 
@@ -39,7 +40,7 @@ class MainWindow(QMainWindow):
             self.windowFlags() | Qt.WindowStaysOnTopHint)
         self.setWindowFlags(self.windowFlags() &
                             ~Qt.WindowMaximizeButtonHint)
-        self.setMinimumSize(350, 350)
+        self.setFixedSize(450, 600)
         self.setCentralWidget(QWidget(self))
         main_layout = QVBoxLayout()
         self.centralWidget().setLayout(main_layout)
@@ -51,6 +52,18 @@ class MainWindow(QMainWindow):
         pid_layout.addWidget(QLabel("PID(s) of Running WowClassic.exe"))
         pid_layout.addWidget(self.pid_list)
         main_layout.addLayout(pid_layout)
+
+        self.config_path = QLabel(self)
+        self.config_path.setStyleSheet(
+            "border-bottom-width: 1px; border-bottom-style: solid; border-radius: 0px;")
+        self.select_config = QPushButton("...", self)
+        self.select_config.setMaximumWidth(40)
+        self.select_config.clicked.connect(self.on_select_config_clicked)
+        config_layout = QHBoxLayout()
+        config_layout.addWidget(self.config_path)
+        config_layout.addWidget(self.select_config)
+        main_layout.addWidget(QLabel("Configuration:", self))
+        main_layout.addLayout(config_layout)
 
         self.refresh_button = QPushButton("Refresh", self)
         self.refresh_button.clicked.connect(self.on_refresh_clicked)
@@ -86,18 +99,36 @@ class MainWindow(QMainWindow):
         self.tray_icon.setContextMenu(tray_menu)
         self.tray_icon.show()
 
+    def on_select_config_clicked(self):
+        config_dir = os.path.join(os.path.dirname(__file__), "../config")
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        file_name, _ = QFileDialog.getOpenFileName(
+            self, "Select configuration", config_dir, "JSON file (*.json)", options=options)
+        self.config_path.setText(file_name)
+        self.start_button.setDisabled(
+            self.pid_list.currentRow() < 0 or not file_name)
+
     def on_refresh_clicked(self):
         self.pid_list.clear()
         self.pid_list.addItems(
             [str(p.pid) for p in psutil.process_iter() if p.name() == "WowClassic.exe"])
 
     def on_start_clicked(self):
-        if not self.pid_list.count() or self.pid_list.currentRow() < 0:
+        if not self.pid_list.count() or self.pid_list.currentRow(
+        ) < 0 or not self.config_path.text():
             return
+
+        import json
+        with open(self.config_path.text(), 'r') as f:
+            config = json.load(f)
 
         self.thread = QThread()
         self.worker = Worker()
         self.stop_signal.connect(self.worker.stop)
+
+        self.worker.key_sequence = config['key_sequence']
+        self.worker.sleep_times = config['sleep_times']
         self.worker.wow_pid = int(self.pid_list.currentItem().text())
         self.worker.moveToThread(self.thread)
         self.worker.report_msg.connect(self.messages.append)
@@ -117,13 +148,15 @@ class MainWindow(QMainWindow):
 
     def on_pid_changed(self, index):
         no_selection = index < 0 or self.pid_list.count() == 0
-        self.start_button.setDisabled(no_selection)
+        self.start_button.setDisabled(
+            no_selection or not self.config_path.text())
 
     def update_button_status(self):
         self.refresh_button.setEnabled(self.thread.isFinished())
         self.stop_button.setDisabled(self.thread.isFinished())
         self.start_button.setEnabled(self.thread.isFinished())
         self.pid_list.setEnabled(self.thread.isFinished())
+        self.select_config.setEnabled(self.thread.isFinished())
 
     def on_tray_icon_activated(self, reason):
         if reason == QSystemTrayIcon.DoubleClick:
