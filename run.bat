@@ -10,7 +10,7 @@ set CONDAPATH=F:\Anaconda3
 rem Define here the name of the environment
 set ENVNAME=vanilla_wow
 rem Define here the path to your main.py
-set MAINPATH=D:\projects\vanilla_wow_battleground\src\main.py
+set MAINPATH=D:\projects\VanillaWoWKeyPresser\src\main.py
 
 rem The following command activates the base environment.
 rem call C:\ProgramData\Miniconda3\Scripts\activate.bat C:\ProgramData\Miniconda3
