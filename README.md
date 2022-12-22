@@ -27,6 +27,7 @@ conda install pyqt5
 /click PVPReadyDialogEnterBattleButton
 /run if GetBattlefieldWinner() then LeaveBattlefield() end
 ```
+Note: for group join, use `/click BattlefieldFrameGroupJoinButton`
 
 ## The Automatic Retrieve/Resurrect Macro
 ```
