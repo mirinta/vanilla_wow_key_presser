@@ -1,5 +1,0 @@
-{
-	"key_sequence": ["1", "{F12}", "1", "1", "2", "3", "{SPACE}"],
-	"sleep_times": [0.5, 1, 1.5, 2, 2.5],
-	"comments": "1=join/leave bg macro, F12=interact with npc, 2/3=any non-enemy-target spell"
-}
