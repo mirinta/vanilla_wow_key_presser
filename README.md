@@ -1,5 +1,5 @@
 # Vanilla WoW KeyPresser
-Send custom key sequence to WoW process.
+Send custom key sequence to vanilla WoW process.
 
 # Install Requirements
 ```
