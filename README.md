@@ -1,5 +1,5 @@
 # Introduction
-Send custom key sequence to vanilla WoW process.
+Send custom key sequences to vanilla WoW (CN) processes.
 
 # Install Requirements
 ```
