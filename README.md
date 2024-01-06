@@ -1,5 +1,8 @@
 # Introduction
+
 Send custom key sequences to vanilla WoW (CN) processes.
+
+Just for fun.
 
 # Install Requirements
 ```
