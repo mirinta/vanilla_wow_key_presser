@@ -17,7 +17,7 @@ conda install pyqt5
 - [x] Exception handler (stop sending keys when exception appears)
 - [x] Custom key sequence (load configuration file) 
 - [ ] Show screenshot (double click process ID to show a screenshot)
-- [ ] Multiple tasks (one key sequence for one process ID)
+- [x] Multiple tasks (one key sequence for one process ID)
 
 # Useful Macros
 ## The Join/Leave Battleground Macro
