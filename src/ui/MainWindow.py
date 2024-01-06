@@ -35,7 +35,7 @@ class MainWindow(QMainWindow):
                 os.path.dirname(__file__),
                 "../resource/icon.png"))
         self.setWindowIcon(icon)
-        self.setWindowTitle("Vanilla WoW Battleground Bot")
+        self.setWindowTitle("Vanilla WoW Key Presser")
         self.setWindowFlags(
             self.windowFlags() | Qt.WindowStaysOnTopHint)
         self.setWindowFlags(self.windowFlags() &
